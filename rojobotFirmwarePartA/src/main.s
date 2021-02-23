@@ -582,6 +582,7 @@ mvmt2cc:        la  t0,     (SP_MVTBAS1)        # t0 gets base of movment conver
                 nop
 
 
+
 # ========================================================================
 # === next_mvmt() - Calculate  digit for motion indicator              ===
 # === Registers affected: x12, x25                                     ===
