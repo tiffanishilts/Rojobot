@@ -1,33 +1,34 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
     "configurations": [
         {
-            "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
-        },
-        {
-            "name": "Win32",
+            "name": "PlatformIO",
             "includePath": [
-                "d:/Projects/Code/RVfpgaTesting/RVfpga_RojoBot/RVfpga_RojoBot_SW/include",
-                "d:/Projects/Code/RVfpgaTesting/RVfpga_RojoBot/RVfpga_RojoBot_SW/src",
-                "C:/Users/Pine Xmas/.platformio/packages/tool-unity",
+                "c:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/firmware_partA/Proj2Demo/RVfpga_RojoBot_SW/include",
+                "c:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/firmware_partA/Proj2Demo/RVfpga_RojoBot_SW/src",
+                "C:/Users/Tiffani/.platformio/packages/tool-unity",
                 ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "d:/Projects/Code/RVfpgaTesting/RVfpga_RojoBot/RVfpga_RojoBot_SW/include",
-                    "d:/Projects/Code/RVfpgaTesting/RVfpga_RojoBot/RVfpga_RojoBot_SW/src",
-                    "C:/Users/Pine Xmas/.platformio/packages/tool-unity",
+                    "c:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/firmware_partA/Proj2Demo/RVfpga_RojoBot_SW/include",
+                    "c:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/firmware_partA/Proj2Demo/RVfpga_RojoBot_SW/src",
+                    "C:/Users/Tiffani/.platformio/packages/tool-unity",
                     ""
                 ]
             },
             "defines": [
-                "PLATFORMIO=50001",
+                "PLATFORMIO=50100",
                 "D_NEXYS_A7",
                 "D_SWERV_EH1",
                 ""
             ],
-            "intelliSenseMode": "clang-x64",
-            "compilerPath": "C:/Users/Pine Xmas/.platformio/packages/toolchain-riscv/bin/riscv64-unknown-elf-gcc.exe",
+            "compilerPath": "C:/Users/Tiffani/.platformio/packages/toolchain-riscv/bin/riscv64-unknown-elf-gcc.exe",
             "compilerArgs": [
                 "-march=rv32imac",
                 "-mabi=ilp32",

@@ -104,10 +104,11 @@ PORT_SEVENSEG_HGH   = 0x80001010        # (o) 7 Segment Higher Display -- modifi
 PORT_SEVENSEG_LOW   = 0x8000103c        # (o) 7 Segment Lower Display
 PORT_SEVENSEG_DP    = 0x80001039        # (o) 7 segment Decimal Point Display -- modified
 
-PORT_BOTINFO        = 0x80001600        # (i) Bot Info port
-PORT_BOTCTRL        = 0x80001604        # (o) Bot Control port
+PORT_BOTINFO        = 0x80001600        # (i) Bot Info port -- modified
+PORT_BOTCTRL        = 0x80001604        # (o) Bot Control port -- modified
+PORT_BOTEN          = 0x80001608        // Bot Control Enable -- added
 // PORT_BOTUPDT        = 0x80001614        # (i) Bot Update port (Poll) -- code using this is commented out so I'll assume I don't need this
-PORT_INTACK         = 0x80001801        # (o) Bot Int Ack
+PORT_INTACK         = 0x80001801        # (o) Bot Int Ack -- modified
 
 # =====================================
 # === Register bit mappings (masks) ===
@@ -119,7 +120,7 @@ MSK_PBTNS       = 0x0F      # Mask for 4 buttons to display on LED
 MSK_BTN_CENTER  = 0x10      # Pushbutton Center is bit 4
 MSK_BTN_LEFT    = 0x08      # Pushbutton Left is bit 3
 MSK_BTN_UP      = 0x04      # Pushbutton Up is bit 2
-MSK_BTN_RIGHT   = 0x02      # Pushbutton Right is bit 25
+MSK_BTN_RIGHT   = 0x02      # Pushbutton Right is bit 1
 MSK_BTN_DOWN    = 0x01      # Pushbutton Down is bit 0
 
 MSK_SW7         = 0x80      # Slide switch 7 is bit 7
@@ -294,6 +295,11 @@ _start:
                 // enable LEDs & SWs
                 li  t0, PORT_GPIO_EN
                 li  t1, 0x0000FFFF
+                sw  t1, 0(t0)
+
+                // enable bot output -- added
+                li  t0, PORT_BOTEN
+                li  t1, 0xFFFFFFFF
                 sw  t1, 0(t0)
 
                 lui   x12, 0xbf80               # x12 = address of LEDs (0xbf800000)
@@ -496,7 +502,7 @@ init_btnluptbl: la  t3,     (SP_BTNBAS1)        # t3 gets base of button transla
 # === x25 (Button value) is not changed                                     ===
 # =============================================================================
 btn2mot:        la  t0,     (SP_BTNBAS1)        # t0 gets base of button conversion table
-                add t3,     a0, 0               # mask out upper nibble of buttons
+                addi t3,     a0, 0               # mask out upper nibble of buttons
                 AND t3, t3, MSKLOWNIB           #
                 add t0, t0, t3                  # t0 = Base + offset into table
                 lb  t3,     0(t0)               # and fetch the entry
@@ -575,10 +581,6 @@ mvmt2cc:        la  t0,     (SP_MVTBAS1)        # t0 gets base of movment conver
                 beq zero, zero, back_mvmt2cc
                 nop
 
-
-##########################################
-# Modify this function for Project 2 #####
-##########################################
 
 # ========================================================================
 # === next_mvmt() - Calculate  digit for motion indicator              ===
@@ -866,10 +868,10 @@ DEB_rdbtns:     li      x25,        PORT_PBTNS          # read the buttons
                 addi    sp, sp, -4                # push ra to stack
                 sw      ra, 0(sp)
                 */
-                move    t1, ra
-                jal     reorder_btns                # call function
-                nop
-                move    ra, t1
+                //move    t1, ra
+                //jal     reorder_btns                # call function
+                //nop
+                //move    ra, t1
                 /*
                 lw      ra, 0(sp)                 # pop ra from stack
                 addi    sp, sp, 4
