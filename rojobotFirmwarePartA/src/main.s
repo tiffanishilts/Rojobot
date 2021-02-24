@@ -758,18 +758,83 @@ next_step:
                 lb      t0, (SP_ROBOT_MODE)
                 beq     t0, zero, next_step_manual
 ############################################################################################################## 
-next_step_auto: ### It is just given for your reference.
-##
-##
-##       You need to add your code over here to make the icon move automatically. That is to make icon
-##		 follow black line when you  turn on the SW[15].	
-##
-##
-##                
+next_step_auto: 
+
+        // You need to add your code over here to make the icon move automatically. That is to make icon
+		//follow black line when you  turn on the SW[15].
+
+                // store sensor registers in temp registers s1-s3
+                lb s1, SENSOR_REG
+                li s2, PORT_BOTCTRL
+                li s3, PORT_BOTINFO
+                j INIT
+                // xF8 mask for just blk line sensors
+                // xE7 mask for just proximity sensors
+
+                BLOCKED:
+                
+                li t1, 0x00           // load value to turn left and right motor off
+                sw t1, 0(s2)          // STOP
+                
+                BLOCKEDLOOP:
+
+                j BLOCKEDLOOP
+
+                INIT:
+                
+                li t1, 0x00           // load value to turn left and right motor off
+                sw t1, 0(s2)          // STOP
+
+                ONLINE:
+
+                li t1, 0x33           // load value to put left and right motor in to forward mode
+                sw t1, 0(s2)          // FWD
+
+                FWDLOOP:
+
+                andi t1, s1, 0xF8     // check if on blk line
+                li t2, 7              // load value which indicates on blk line
+                beq t1, t2, FWDLOOP    // continue going forward if on blk line
+                
+                WALLCHECK:
+
+                andi t1, s1, 0xE7     // check if wall
+                srli t1, t1, 3        // shift proximity sensors over for comparison
+                li t2, 3              // load value which indicates wall
+                beq t1, t2, BLOCKED   // enter fail state until reset if wall
+
+                REV2LINE:
+                
+                li t1, 0x22           // load value to put left and right motor in reverse
+                sw t1, 0(s2)          // REV
+
+                REVLOOP:
+
+                andi t1, s1, 0xF8     // check if on blk line
+                beq t1, zero, REVLOOP // continue reversing if not on blk line
+
+                TURNING:
+
+                li t1, 0x30           // load value for slow right turn
+                sw t1, 0(s2)          // SRT
+
+                TURNINGLOOP:
+
+                andi t1, s3, 0xF8         // check if 45 degrees
+                li t2, 0x01
+                bne t1, t2, TURNINGLOOP   // continue turnining if not at 45 degrees
+
+                ENDTURN:
+
+                li t1, 0x00           // load value to turn left and right motor off
+                sw t1, 0(s2)          // STOP
+
+                j ONLINE
+
 #########################################################################################################
 
 next_step_manual:
-                lb      x25,(SENSOR_REG)
+                lb      x25,(SENSOR_REG)   // I don't think these lines are doing anything...
                 lb      t3, (SENSOR_REG)
                 lb      t0, (SENSOR_REG)
                 AND     x25,    x25,MSKPROXL
