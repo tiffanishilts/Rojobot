@@ -240,7 +240,7 @@ module rvfpga
     .worldmap_addr(worldmap_addrA),
     .worldmap_data(worldmap_dataA),
     .clk_in(clk_rojo),
-    .reset(rstn),
+    .reset(rst_core),
     .upd_sysregs(IO_BotUpdt),
     .Bot_Config_reg(i_sw[7:0])); 
 

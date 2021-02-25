@@ -329,6 +329,11 @@ _start:
                 la t2, SP_NSA_STATE
                 sw t0, 0(t2)
 
+                li s1, 0   // initialize state for state machine
+                li s2, PORT_BOTCTRL
+                li s3, PORT_BOTINFO
+                li s4, 0   // initialize turn counter
+
 # ==================
 # === Main  Loop ===
 # ==================
@@ -340,9 +345,9 @@ main_L0:
                 lw t0, 0(t2)
                 srl     t0, t0, 16              # shift right 16 bits, due to arrangement in RVfpga
                 # and     t0, t0, 0x8000        # mask out all switches except [15]
-                li t2, 0x8000
-                and t0, t0, t2
-                srl     t0, t0, 15            # move [15] to position 0
+                //li t2, 0x8000
+                //and t0, t0, t2
+                //srl     t0, t0, 15            # move [15] to position 0
                 # sb      t0, (SP_ROBOT_MODE)
                 la t2, SP_ROBOT_MODE
                 sb t0, 0(t2)
@@ -384,7 +389,7 @@ main_L1:
                 la t2, LOCx_REG
                 sb x22, 0(t2)
 
-                jal next_loc                    #   Dig[3:2] = nex LocX# Dig[25:0] = next LocY
+                jal next_loc                    #   Dig[3:0] = next LocX, next LocY
                 nop
                 jal next_mvmt                   #   Dig[4] = next movement
                 nop
@@ -760,76 +765,132 @@ next_step:
 ############################################################################################################## 
 next_step_auto: 
 
-        // You need to add your code over here to make the icon move automatically. That is to make icon
+                // You need to add your code over here to make the icon move automatically. That is to make icon
 		//follow black line when you  turn on the SW[15].
+                
+                STATEMACHINE:
 
-                // store sensor registers in temp registers s1-s3
-                lb s1, SENSOR_REG
-                li s2, PORT_BOTCTRL
-                li s3, PORT_BOTINFO
-                j INIT
-                // xF8 mask for just blk line sensors
-                // xE7 mask for just proximity sensors
+                beq s1, zero, INIT   // if in state zero, go to initialization
 
+                li t1, 1
+                beq t1, s1, ONLINE   // if in state one, go to online
+
+                li t1, 2
+                beq t1, s1, REV2LINE   // if in state two, go to reverse
+
+                li t1, 3
+                beq t1, s4, ENDTURN   // if in state three, and s4 has progressed to 3, go to end turn
+
+                li t1, 3
+                beq t1, s1, TURNING   // if in state three, go to turn
+
+                li t1, 5
+                beq t1, s1, BLOCKED   // if in state five, go to blocked
+
+                ENTERBLOCKEDSTATE:
+
+                li s1, 5   // set state
+                
                 BLOCKED:
                 
                 li t1, 0x00           // load value to turn left and right motor off
-                sw t1, 0(s2)          // STOP
+                sb t1, 0(s2)          // STOP
                 
-                BLOCKEDLOOP:
-
-                j BLOCKEDLOOP
+                beq     zero, zero, ret_next_step
+                nop
 
                 INIT:
                 
                 li t1, 0x00           // load value to turn left and right motor off
-                sw t1, 0(s2)          // STOP
+                sb t1, 0(s2)          // STOP
+
+                ENTERONLINESTATE:
+
+                li s1, 1   // set new state
+
+                beq     zero, zero, ret_next_step
+                nop
 
                 ONLINE:
 
-                li t1, 0x33           // load value to put left and right motor in to forward mode
-                sw t1, 0(s2)          // FWD
-
-                FWDLOOP:
-
-                andi t1, s1, 0xF8     // check if on blk line
-                li t2, 7              // load value which indicates on blk line
-                beq t1, t2, FWDLOOP    // continue going forward if on blk line
-                
                 WALLCHECK:
 
-                andi t1, s1, 0xE7     // check if wall
-                srli t1, t1, 3        // shift proximity sensors over for comparison
-                li t2, 3              // load value which indicates wall
-                beq t1, t2, BLOCKED   // enter fail state until reset if wall
+                lw t1, 0(s3)             // read bot input register
+                srli t1, t1, 11          // shift over for proximity sensor
+                and t1, t1, 0x00000003   // mask for proximity sensors
+                li t2, 3                 // load value which indicates wall
+                beq t1, t2, ENTERBLOCKEDSTATE      // enter fail state until reset if wall
+
+                LINECHECK:
+
+                lw t1, 0(s3)              // read bot input register
+                srli t1, t1, 8            // shift over for sensor reg
+                and t1, t1, 0x00000007   // mask for blk line sensors
+                bne t1, zero, ENTERREVSTATE   // jump to reverse if not over black line
+  
+                li t1, 0x33           // load value to put left and right motor in to forward mode
+                sb t1, 0(s2)          // FWD
+
+                beq     zero, zero, ret_next_step
+                nop
+
+                ENTERREVSTATE:
+
+                li s1, 2   // set new state
+
+                li t1, 0x22           // load value to put left and right motor in reverse
+                sb t1, 0(s2)          // REV
+
+                beq     zero, zero, ret_next_step
+                nop
 
                 REV2LINE:
-                
+
+                lw t1, 0(s3)              // read bot input register
+                srli t1, t1, 8            // shift over for sensor reg
+                and t1, t1, 0x00000007   // mask for blk line sensors
+                li t2, 0x07
+                bne t1, t2, ENTERTURNINGSTATE   // jump to turning if back on black line
+
                 li t1, 0x22           // load value to put left and right motor in reverse
-                sw t1, 0(s2)          // REV
+                sb t1, 0(s2)          // REV
 
-                REVLOOP:
+                beq     zero, zero, ret_next_step
+                nop
 
-                andi t1, s1, 0xF8     // check if on blk line
-                beq t1, zero, REVLOOP // continue reversing if not on blk line
+                ENTERTURNINGSTATE:
+
+                li s1, 3   // set new state
+
+                li t1, 0x30           // load value for slow right turn
+                sb t1, 0(s2)          // SRT
+
+                li s4, 1   // start turn counter
+
+                beq     zero, zero, ret_next_step
+                nop
 
                 TURNING:
 
                 li t1, 0x30           // load value for slow right turn
-                sw t1, 0(s2)          // SRT
+                sb t1, 0(s2)          // SRT
 
-                TURNINGLOOP:
+                addi s4, s4, 1   // add to turn counter
 
-                andi t1, s3, 0xF8         // check if 45 degrees
-                li t2, 0x01
-                bne t1, t2, TURNINGLOOP   // continue turnining if not at 45 degrees
-
+                bne     zero, zero, ret_next_step
+                nop 
+                
                 ENDTURN:
 
-                li t1, 0x00           // load value to turn left and right motor off
-                sw t1, 0(s2)          // STOP
+                li s4, 0   // reset turn counter
 
-                j ONLINE
+                li t1, 0x00           // load value to turn left and right motor off
+                sb t1, 0(s2)          // STOP
+
+                li s1, 1   // set new state
+
+                beq     zero, zero, ret_next_step
+                nop
 
 #########################################################################################################
 
