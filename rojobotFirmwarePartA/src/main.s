@@ -345,19 +345,19 @@ main_L0:
                 lw t0, 0(t2)
                 srl     t0, t0, 16              # shift right 16 bits, due to arrangement in RVfpga
                 # and     t0, t0, 0x8000        # mask out all switches except [15]
-                //li t2, 0x8000
-                //and t0, t0, t2
-                //srl     t0, t0, 15            # move [15] to position 0
+                li t2, 0x8000
+                and t0, t0, t2
+                srl     t0, t0, 15            # move [15] to position 0
                 # sb      t0, (SP_ROBOT_MODE)
                 la t2, SP_ROBOT_MODE
                 sb t0, 0(t2)
-/*
-                # polling for the robot interrupt
-                li    x13, PORT_BOTUPDT         #   while(25) {  // main loop is an infinite loop
+
+               /* # polling for the robot interrupt
+                li    x13, PORT_INTACK         #   while(25) {  // main loop is an infinite loop
                 lw    x21, 0(x13)               #   while (upd_sysreg == 0)  {}   // loop until isr updates rojobot registers
                 beq   x21, zero, main_L0
                 nop
-*/
+              */
                 li    x13, PORT_INTACK          #   Load the Acknowledgement port address
                 li    x21, INT_ACK              #   Set the Acknowledgement bit
                 sb    x21, 0(x13)               #   Write the Acknowledgement bit -- modified
@@ -779,24 +779,27 @@ next_step_auto:
                 beq t1, s1, REV2LINE   // if in state two, go to reverse
 
                 li t1, 3
-                beq t1, s4, ENDTURN   // if in state three, and s4 has progressed to 3, go to end turn
-
-                li t1, 3
                 beq t1, s1, TURNING   // if in state three, go to turn
 
-                li t1, 5
+                li t1, 4
+                beq t1, s1, TURNINGWRAPCASE   // if in state three, go to turn
+
+               // li t1, 5
+               // beq t1, s1, ENDTURN   // if in state three, and s4 has progressed to 3, go to end turn
+
+                li t1, 6
                 beq t1, s1, BLOCKED   // if in state five, go to blocked
 
                 ENTERBLOCKEDSTATE:
 
-                li s1, 5   // set state
+                li s1, 6   // set state to blocked
                 
                 BLOCKED:
                 
                 li t1, 0x00           // load value to turn left and right motor off
                 sb t1, 0(s2)          // STOP
                 
-                beq     zero, zero, ret_next_step
+                beq     zero, zero, ret_next_step   // return to main loop
                 nop
 
                 INIT:
@@ -806,9 +809,9 @@ next_step_auto:
 
                 ENTERONLINESTATE:
 
-                li s1, 1   // set new state
+                li s1, 1   // set new state to online
 
-                beq     zero, zero, ret_next_step
+                beq     zero, zero, ret_next_step   // return to main loop
                 nop
 
                 ONLINE:
@@ -817,27 +820,28 @@ next_step_auto:
 
                 lw t1, 0(s3)             // read bot input register
                 srli t1, t1, 11          // shift over for proximity sensor
-                and t1, t1, 0x00000003   // mask for proximity sensors
-                li t2, 3                 // load value which indicates wall
+                andi t1, t1, 0x00000003   // mask for proximity sensors
+                li t2, 0x03   // load value indicating wall
                 beq t1, t2, ENTERBLOCKEDSTATE      // enter fail state until reset if wall
 
                 LINECHECK:
 
                 lw t1, 0(s3)              // read bot input register
                 srli t1, t1, 8            // shift over for sensor reg
-                and t1, t1, 0x00000007   // mask for blk line sensors
+                andi t1, t1, 0x00000007   // mask for blk line sensors
                 bne t1, zero, ENTERREVSTATE   // jump to reverse if not over black line
   
                 li t1, 0x33           // load value to put left and right motor in to forward mode
                 sb t1, 0(s2)          // FWD
 
-                beq     zero, zero, ret_next_step
+                beq     zero, zero, ret_next_step   // return to main loop
                 nop
 
                 ENTERREVSTATE:
 
                 li s1, 2   // set new state
 
+                
                 li t1, 0x22           // load value to put left and right motor in reverse
                 sb t1, 0(s2)          // REV
 
@@ -848,7 +852,7 @@ next_step_auto:
 
                 lw t1, 0(s3)              // read bot input register
                 srli t1, t1, 8            // shift over for sensor reg
-                and t1, t1, 0x00000007   // mask for blk line sensors
+                andi t1, t1, 0x00000007   // mask for blk line sensors
                 li t2, 0x07
                 bne t1, t2, ENTERTURNINGSTATE   // jump to turning if back on black line
 
@@ -860,29 +864,62 @@ next_step_auto:
 
                 ENTERTURNINGSTATE:
 
+                lw s4, 0(s3)   // store original orientation value
+                andi s4, s4, 0x00000007
+
+                li t1, 7
+                bne t1, s4, NOTWRAPCASE
+                li s1, 4
+                j WRAPCASE
+
+                NOTWRAPCASE:
+
                 li s1, 3   // set new state
 
-                li t1, 0x30           // load value for slow right turn
+                WRAPCASE:
+
+                li t1, 0x02           // load value for slow right turn
+                sb t1, 0(s2)          // SRT
+                
+                beq     zero, zero, ret_next_step
+                nop 
+
+                TURNING:
+                
+                lw t1, 0(s3)   // read orientation
+                andi t1, t1, 0x00000007
+
+                addi t2, s4, 1
+
+                beq t1, t2, ENDTURN
+
+                li t1, 0x02           // load value for slow right turn
                 sb t1, 0(s2)          // SRT
 
-                li s4, 1   // start turn counter
+                beq     zero, zero, ret_next_step
+                nop 
+                
+                TURNINGWRAPCASE:
+
+                lw t1, 0(s3)   // read orientation
+                andi t1, t1, 0x00000007
+
+                beq t1, zero, ENDTURN
+
+                li t1, 0x02           // load value for slow right turn
+                sb t1, 0(s2)          // SRT
 
                 beq     zero, zero, ret_next_step
                 nop
 
-                TURNING:
+                // ENTERENDTURNSTATE:
 
-                li t1, 0x30           // load value for slow right turn
-                sb t1, 0(s2)          // SRT
+                // li s1, 5 // set new state
 
-                addi s4, s4, 1   // add to turn counter
+                // beq     zero, zero, ret_next_step
+                // nop 
 
-                bne     zero, zero, ret_next_step
-                nop 
-                
                 ENDTURN:
-
-                li s4, 0   // reset turn counter
 
                 li t1, 0x00           // load value to turn left and right motor off
                 sb t1, 0(s2)          // STOP

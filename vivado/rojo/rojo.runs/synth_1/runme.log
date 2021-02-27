@@ -18,7 +18,7 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Device 21-403] Loading part xc7a100tcsg324-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 26688 
+INFO: Helper process launched with PID 12292 
 WARNING: [Synth 8-1921] elaboration system task error violates IEEE 1800 syntax [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/lib/beh_lib.sv:162]
 WARNING: [Synth 8-2507] parameter declaration becomes local in axi2wb with formal parameter declaration list [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Interconnect/AxiToWb/axi2wb.v:71]
 WARNING: [Synth 8-2507] parameter declaration becomes local in axi2wb with formal parameter declaration list [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Interconnect/AxiToWb/axi2wb.v:81]
@@ -38,7 +38,7 @@ WARNING: [Synth 8-2369] multiple packed dimensions are not allowed in this mode 
 WARNING: [Synth 8-2369] multiple packed dimensions are not allowed in this mode of verilog [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/SystemController/swervolf_syscon.v:372]
 WARNING: [Synth 8-2507] parameter declaration becomes local in wb_mux with formal parameter declaration list [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Interconnect/WishboneInterconnect/wb_intercon_1.2.2/wb_mux.v:87]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 893.469 ; gain = 241.336
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 892.793 ; gain = 240.148
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'rvfpga' [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/rvfpga.sv:25]
 	Parameter bootrom_file bound to: (null) - type: string 
@@ -645,12 +645,12 @@ INFO: [Synth 8-6157] synthesizing module 'BSCANE2__parameterized1' [C:/Vivado/20
 	Parameter JTAG_CHAIN bound to: 3 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'BSCANE2__parameterized1' (38#1) [C:/Vivado/2019.2/scripts/rt/data/unisim_comp.v:876]
 INFO: [Synth 8-6155] done synthesizing module 'bscan_tap' (39#1) [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/bscanTAP/bscan_tap.sv:16]
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-25052-DESKTOP-1NPBEFB/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (40#1) [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-25052-DESKTOP-1NPBEFB/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-20696-DESKTOP-1NPBEFB/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (40#1) [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-20696-DESKTOP-1NPBEFB/realtime/clk_wiz_0_stub.v:5]
 INFO: [Synth 8-6157] synthesizing module 'world_map' [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/hdl_partA/world_maps_partA/world_map.v:39]
 INFO: [Synth 8-6155] done synthesizing module 'world_map' (41#1) [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/hdl_partA/world_maps_partA/world_map.v:39]
-INFO: [Synth 8-6157] synthesizing module 'rojobot31_0' [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-25052-DESKTOP-1NPBEFB/realtime/rojobot31_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'rojobot31_0' (42#1) [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-25052-DESKTOP-1NPBEFB/realtime/rojobot31_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'rojobot31_0' [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-20696-DESKTOP-1NPBEFB/realtime/rojobot31_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'rojobot31_0' (42#1) [C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/.Xil/Vivado-20696-DESKTOP-1NPBEFB/realtime/rojobot31_0_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'swervolf_core' [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/swervolf_core.v:25]
 	Parameter bootrom_file bound to: (null) - type: string 
 	Parameter BOOTROM_SIZE bound to: 4096 - type: integer 
@@ -1880,7 +1880,7 @@ WARNING: [Synth 8-3331] design lsu_bus_buffer has unconnected port lsu_pkt_dc1[b
 WARNING: [Synth 8-3331] design lsu_bus_buffer has unconnected port lsu_pkt_dc1[half]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1382.922 ; gain = 730.789
+Finished RTL Elaboration : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1387.617 ; gain = 734.973
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1893,12 +1893,12 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1382.922 ; gain = 730.789
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1387.617 ; gain = 734.973
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1382.922 ; gain = 730.789
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1387.617 ; gain = 734.973
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1382.922 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1387.617 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 57 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -1920,7 +1920,7 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/rvfpga_propI
 INFO: [Timing 38-2] Deriving generated clocks
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.046 . Memory (MB): peak = 1667.629 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.047 . Memory (MB): peak = 1660.406 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 20 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 16 instances
@@ -1928,15 +1928,17 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS(x2)): 1 instance 
   PLLE2_BASE => PLLE2_ADV: 1 instance 
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.437 . Memory (MB): peak = 1667.629 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.417 . Memory (MB): peak = 1660.406 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:01:15 ; elapsed = 00:01:18 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Constraint Validation : Time (s): cpu = 00:01:10 ; elapsed = 00:01:09 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5580] Multithreading enabled for synth_design using a maximum of 2 processes.
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:10 ; elapsed = 00:01:09 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/litedram_core.v:4591]
 INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/litedram_core.v:7071]
 INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/litedram_core.v:7691]
@@ -2072,7 +2074,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'tstate_reg' using encoding
 INFO: [Synth 8-3354] encoded FSM with state register 'rstate_reg' using encoding 'sequential' in module 'uart_receiver'
 WARNING: [Synth 8-327] inferring latch for variable 'en_ff_reg' [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/lib/beh_lib.sv:94]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:51 ; elapsed = 00:01:57 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:44 ; elapsed = 00:01:46 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-223] decloning instance 'swervolf/swerv_eh1/swerv/dbg/axi_bready_ff' (rvdffs) to 'swervolf/swerv_eh1/swerv/dbg/axi_rready_ff'
 INFO: [Synth 8-223] decloning instance 'swervolf/swerv_eh1/swerv/exu/div_e1/dividend_c' (rvtwoscomp) to 'swervolf/swerv_eh1/swerv/exu/div_e1/q_ff_c'
@@ -16084,7 +16086,7 @@ WARNING: [Synth 8-3332] Sequential element (i_atop_filter/FSM_sequential_w_state
 WARNING: [Synth 8-3332] Sequential element (i_atop_filter/FSM_sequential_w_state_q_reg[1]) is unused and will be removed from module axi_err_slv__1.
 WARNING: [Synth 8-3332] Sequential element (i_atop_filter/FSM_sequential_w_state_q_reg[0]) is unused and will be removed from module axi_err_slv__1.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:05:13 ; elapsed = 00:06:29 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:05:05 ; elapsed = 00:06:10 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -16212,7 +16214,7 @@ Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-3321] set_false_path : Empty from list for constraint at line 8 of C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/rvfpga.xdc. [C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/rvfpga.xdc:8]
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:05:32 ; elapsed = 00:06:48 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:05:23 ; elapsed = 00:06:29 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
@@ -16220,7 +16222,7 @@ Start Timing Optimization
 WARNING: [Synth 8-3332] Sequential element (axi_clk/clkhdr/en_ff_reg) is unused and will be removed from module ifu_mem_ctl.
 WARNING: [Synth 8-3332] Sequential element (dma_bus_cgc/clkhdr/en_ff_reg) is unused and will be removed from module dma_ctrl.
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:06:54 ; elapsed = 00:08:11 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Timing Optimization : Time (s): cpu = 00:06:41 ; elapsed = 00:07:48 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -16404,7 +16406,7 @@ INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM bloc
 INFO: [Synth 8-7053] The timing for the instance i_0/swervolf/bootrom/ram/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7053] The timing for the instance i_0/swervolf/bootrom/ram/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:07:22 ; elapsed = 00:08:56 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Technology Mapping : Time (s): cpu = 00:07:09 ; elapsed = 00:08:32 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -16561,13 +16563,13 @@ CRITICAL WARNING: [Synth 8-4442] BlackBox module partAmap has unconnected pin ad
 CRITICAL WARNING: [Synth 8-4442] BlackBox module partAmap has unconnected pin addrb[1]
 CRITICAL WARNING: [Synth 8-4442] BlackBox module partAmap has unconnected pin addrb[0]
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:07:38 ; elapsed = 00:09:13 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished IO Insertion : Time (s): cpu = 00:07:25 ; elapsed = 00:08:48 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:07:39 ; elapsed = 00:09:13 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Renaming Generated Instances : Time (s): cpu = 00:07:25 ; elapsed = 00:08:49 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -16586,25 +16588,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:07:56 ; elapsed = 00:09:30 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:07:42 ; elapsed = 00:09:05 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:07:57 ; elapsed = 00:09:31 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Renaming Generated Ports : Time (s): cpu = 00:07:43 ; elapsed = 00:09:07 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:07:59 ; elapsed = 00:09:34 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Handling Custom Attributes : Time (s): cpu = 00:07:45 ; elapsed = 00:09:09 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:08:00 ; elapsed = 00:09:34 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Renaming Generated Nets : Time (s): cpu = 00:07:46 ; elapsed = 00:09:09 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -19814,11 +19816,11 @@ Report Instance Areas:
 |3115  |  tap                                                                 |bscan_tap                           |   229|
 +------+----------------------------------------------------------------------+------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:08:00 ; elapsed = 00:09:35 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Finished Writing Synthesis Report : Time (s): cpu = 00:07:46 ; elapsed = 00:09:10 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 15 critical warnings and 309 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:06:54 ; elapsed = 00:09:06 . Memory (MB): peak = 1667.629 ; gain = 730.789
-Synthesis Optimization Complete : Time (s): cpu = 00:08:01 ; elapsed = 00:09:36 . Memory (MB): peak = 1667.629 ; gain = 1015.496
+Synthesis Optimization Runtime : Time (s): cpu = 00:06:44 ; elapsed = 00:08:44 . Memory (MB): peak = 1660.406 ; gain = 734.973
+Synthesis Optimization Complete : Time (s): cpu = 00:07:46 ; elapsed = 00:09:11 . Memory (MB): peak = 1660.406 ; gain = 1007.762
 INFO: [Project 1-571] Translating synthesized netlist
 Release 14.7 - ngc2edif P_INT.20190617 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
@@ -19829,18 +19831,18 @@ Processing design ...
    Preping design's macros ...
   finished :Prep
 Writing EDIF netlist file world_map.edif ...
-ngc2edif: Total memory usage is 4320900 kilobytes
+ngc2edif: Total memory usage is 4320644 kilobytes
 
 Reading core file 'C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/world_maps/world_map_partA/world_map.ngc' for (cell view 'world_map', library 'work')
 Parsing EDIF File [./.ngc2edfcache/world_map_ngc_3bb14d70.edif]
 Finished Parsing EDIF File [./.ngc2edfcache/world_map_ngc_3bb14d70.edif]
-Netlist sorting complete. Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1667.629 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1660.406 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 1678 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
 INFO: [Project 1-479] Netlist was created with Xilinx ngc2edif P_INT.20190617
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 4 inverter(s) to 83 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.055 . Memory (MB): peak = 1667.629 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.058 . Memory (MB): peak = 1660.406 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 136 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 32 instances
@@ -19853,11 +19855,11 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 712 Infos, 455 Warnings, 15 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:08:32 ; elapsed = 00:10:10 . Memory (MB): peak = 1667.629 ; gain = 1306.766
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1667.629 ; gain = 0.000
+synth_design: Time (s): cpu = 00:08:18 ; elapsed = 00:09:44 . Memory (MB): peak = 1660.406 ; gain = 1299.773
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1660.406 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/rvfpga.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:20 ; elapsed = 00:00:15 . Memory (MB): peak = 1667.629 ; gain = 0.000
+write_checkpoint: Time (s): cpu = 00:00:20 ; elapsed = 00:00:15 . Memory (MB): peak = 1660.406 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file rvfpga_utilization_synth.rpt -pb rvfpga_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Feb 23 12:18:45 2021...
+INFO: [Common 17-206] Exiting Vivado at Tue Feb 23 19:33:01 2021...
