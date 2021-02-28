@@ -17,6 +17,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+set_param chipscope.maxJobs 1
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -58,6 +59,16 @@ set_property file_type "Verilog Header" [get_files C:/Users/Tiffani/Documents/EC
 set_property file_type "Verilog Header" [get_files C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/include/global.h]
 set_property file_type "Verilog Header" [get_files C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/OtherSources/swervolf-swerv_default_config_0.7/configs/snapshots/default/pic_map_auto.h]
 set_property file_type "Verilog Header" [get_files C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/include/build.h]
+read_mem {
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballE.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballW.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballS.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballSW.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballN.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballNE.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballNW.mem
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballSE.mem
+}
 read_verilog -library xil_defaultlib -sv {
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__common_cells_1.16.4/src/addr_decode.sv
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__axi_0.23.0-r1/src/axi_pkg.sv
@@ -73,6 +84,7 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/lib/beh_lib.sv
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/bscanTAP/bscan_tap.sv
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__common_cells_1.16.4/src/cdc_fifo_gray.sv
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/colorizer.sv
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__common_cells_1.16.4/src/counter.sv
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/dbg/dbg.sv
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/include/swerv_types.sv
@@ -125,12 +137,15 @@ read_verilog -library xil_defaultlib {
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/clk_gen_nexys.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/gpio/debounce.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/BootROM/dpram64.v
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/dtg.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/spi/fifo4.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/gpio/gpio_top.v
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/icon.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/litedram_core.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/litedram_top.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/ptc/ptc_top.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/uart/raminfr.v
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/scale.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/serv_1.0.2/serv_alu.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/serv_1.0.2/serv_bufreg.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/LiteDRAM/serv_1.0.2/serv_csr.v
@@ -158,7 +173,7 @@ read_verilog -library xil_defaultlib {
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Interconnect/WishboneInterconnect/wb_intercon.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/BootROM/wb_mem_wrapper.v
   C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Interconnect/WishboneInterconnect/wb_intercon_1.2.2/wb_mux.v
-  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/hdl_partA/world_maps_partA/world_map.v
+  C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/world_maps_partA/world_map.v
 }
 read_ip -quiet C:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/ip/rojobot31_0/rojobot31_0.xci
 
@@ -167,7 +182,7 @@ set_property used_in_implementation false [get_files -all c:/Users/Tiffani/Docum
 set_property used_in_implementation false [get_files -all c:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
 
-read_edif C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/world_maps/world_map_partA/world_map.ngc
+read_edif C:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/imports/world_maps_partA/world_map.ngc
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
 # design are intentionally left as such for best results. Dcp files will be

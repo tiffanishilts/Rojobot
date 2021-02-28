@@ -66,6 +66,27 @@ set_property -dict { PACKAGE_PIN M18   IOSTANDARD LVCMOS33 } [get_ports { i_pb[2
 set_property -dict { PACKAGE_PIN P17   IOSTANDARD LVCMOS33 } [get_ports { i_pb[3] }]
 set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS33 } [get_ports { i_pb[4] }]
 
+## ADDED
+## VGA Pins
+
+set_property -dict {PACKAGE_PIN A3 IOSTANDARD LVCMOS33} [get_ports {RED[0]}]
+set_property -dict {PACKAGE_PIN B4 IOSTANDARD LVCMOS33} [get_ports {RED[1]}]
+set_property -dict {PACKAGE_PIN C5 IOSTANDARD LVCMOS33} [get_ports {RED[2]}]
+set_property -dict {PACKAGE_PIN A4 IOSTANDARD LVCMOS33} [get_ports {RED[3]}]
+
+set_property -dict {PACKAGE_PIN C6 IOSTANDARD LVCMOS33} [get_ports {GRN[0]}]
+set_property -dict {PACKAGE_PIN A5 IOSTANDARD LVCMOS33} [get_ports {GRN[1]}]
+set_property -dict {PACKAGE_PIN B6 IOSTANDARD LVCMOS33} [get_ports {GRN[2]}]
+set_property -dict {PACKAGE_PIN A6 IOSTANDARD LVCMOS33} [get_ports {GRN[3]}]
+
+set_property -dict {PACKAGE_PIN B7 IOSTANDARD LVCMOS33} [get_ports {BLU[0]}]
+set_property -dict {PACKAGE_PIN C7 IOSTANDARD LVCMOS33} [get_ports {BLU[1]}]
+set_property -dict {PACKAGE_PIN D7 IOSTANDARD LVCMOS33} [get_ports {BLU[2]}]
+set_property -dict {PACKAGE_PIN D8 IOSTANDARD LVCMOS33} [get_ports {BLU[3]}]
+
+set_property -dict {PACKAGE_PIN B11 IOSTANDARD LVCMOS33} [get_ports hsync]
+set_property -dict {PACKAGE_PIN B12 IOSTANDARD LVCMOS33} [get_ports vsync]
+
 ##7 segment display
 set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS33 } [get_ports { CA }]; #IO_L24N_T3_A00_D16_14 Sch=ca
 set_property -dict { PACKAGE_PIN R10   IOSTANDARD LVCMOS33 } [get_ports { CB }]; #IO_25_14 Sch=cb

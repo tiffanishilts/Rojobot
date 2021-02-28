@@ -80,7 +80,7 @@ set rc [catch {
   add_files -quiet C:/Users/Tiffani/Documents/ECE540/rojo/rojo.runs/synth_1/rvfpga.dcp
   read_ip -quiet C:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/ip/rojobot31_0/rojobot31_0.xci
   read_ip -quiet C:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
-  read_edif C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/world_maps/world_map_partA/world_map.ngc
+  read_edif C:/Users/Tiffani/Documents/ECE540/rojo/rojo.srcs/sources_1/imports/world_maps_partA/world_map.ngc
   read_xdc C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/liteDRAM.xdc
   read_xdc C:/Users/Tiffani/Documents/ECE540/ECE540ProjTwo/Rojobot/fpga_code/src/rvfpga.xdc
   link_design -top rvfpga -part xc7a100tcsg324-1

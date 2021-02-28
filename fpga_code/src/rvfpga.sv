@@ -55,7 +55,10 @@ module rvfpga
     output wire        o_accel_cs_n,
     output wire        o_accel_mosi,
     input wire         i_accel_miso,
-    output wire        accel_sclk);
+    output wire        accel_sclk,
+    // ADDED DMA signals
+    output reg [3:0]   RED, GRN, BLU,
+    output wire        vsync, hsync);
 
    wire [15:0] 	       gpio_out;
 
@@ -70,20 +73,6 @@ module rvfpga
    wire 	 rst_core;
    wire 	 user_clk;
    wire 	 user_rst;
-   wire    clk_rojo;
-   wire    IO_BotUpdt;
-   wire    IO_INT_ACK;
-   reg     IO_BotUpdt_Sync;
-   wire [13:0]  worldmap_addrA;
-   wire [1:0]   worldmap_dataA;
-   wire [7:0]   locX_reg;
-   wire [7:0]   locY_reg;
-   wire [7:0]   botInfo_reg;
-   wire [7:0]   sensors_reg;
-   wire [7:0]   motCtl_in;
-   //wire [7:0]   botConfig_in;
-   wire [13:0]  worldmap_addrB;
-   wire [1:0]   worldmap_dataB;
    
    clk_gen_nexys clk_gen
      (.i_clk (user_clk),
@@ -214,6 +203,25 @@ module rvfpga
       .version        (4'd1));
    
 
+   // poke rojo
+
+   wire    clk_rojo;
+   wire    IO_BotUpdt;
+   wire    IO_INT_ACK;
+   reg     IO_BotUpdt_Sync;
+   wire [13:0]  worldmap_addrA;
+   wire [1:0]   worldmap_dataA;
+   wire [13:0]  worldmap_VGAaddr;
+   wire [1:0]   worldmap_VGAdata;
+   wire [7:0]   locX_reg;
+   wire [7:0]   locY_reg;
+   wire [7:0]   botInfo_reg;
+   wire [7:0]   sensors_reg;
+   wire [7:0]   motCtl_in;
+   wire [13:0]  worldmap_addrB;
+   wire [1:0]   worldmap_dataB;
+   wire [15:0]  gpio_db;
+
      clk_wiz_0 rojoClk
    (// Clock out ports
     .clk_75(clk_rojo),     // output clk_75
@@ -226,9 +234,9 @@ module rvfpga
     (.clka(clk_rojo),
      .addra(worldmap_addrA),
      .douta(worldmap_dataA),
-     .clkb(),
-     .addrb(),
-     .doutb()
+     .clkb(clk_rojo),
+     .addrb(worldmap_VGAaddr),
+     .doutb(worldmap_VGAdata)
     );
 
     rojobot31_0 tiffanisBot
@@ -242,7 +250,48 @@ module rvfpga
     .clk_in(clk_rojo),
     .reset(rst_core),
     .upd_sysregs(IO_BotUpdt),
-    .Bot_Config_reg(i_sw[7:0])); 
+    .Bot_Config_reg(gpio_db[7:0]));
+
+    // VGA
+
+    wire        vid_on;
+    wire [9:0]  px_row;
+    wire [9:0]  px_col;
+    wire [1:0]  icon_px;
+
+    dtg pokerojo (
+        .clock(clk_rojo),
+        .rst(rst_core),
+        .horiz_sync(hsync),
+        .vert_sync(vsync),
+        .video_on(vid_on),
+        .pixel_row(px_row),
+        .pixel_column(px_col)
+    );
+
+    icon pokeball (
+        .pixel_row(px_row),
+        .pixel_column(px_col),
+        .botinfo_reg(botInfo_reg),
+        .locx_reg(locX_reg),
+        .locy_reg(locY_reg),
+        .icon(icon_px)
+    );
+
+    scale scalar (
+        .pixel_addr({px_col, px_row}),
+        .vid_addr(worldmap_VGAaddr)
+    );
+
+    colorizer VGAcolor (
+        .video_on(vid_on),
+        .world_pixel(worldmap_VGAdata),
+        .icon(icon_px),
+        .vgaRed(RED),
+        .vgaGreen(GRN),
+        .vgaBlue(BLU)
+    );
+
 
    swervolf_core
      #(.bootrom_file (bootrom_file))
@@ -307,6 +356,8 @@ module rvfpga
       .io_pb  (i_pb),
       .io_rojo ({locX_reg, locY_reg, sensors_reg, botInfo_reg, IO_BotUpdt_Sync, motCtl_in}),
       .IO_INT_ACK(IO_INT_ACK),
+      // added
+      .gpio_db(gpio_db),
       .AN (AN),
       // added
       .DP (DP),
@@ -326,7 +377,7 @@ module rvfpga
        end else begin
            IO_BotUpdt_Sync <= IO_BotUpdt_Sync;
        end
-   end // always
+   end
 
 
    always @(posedge clk_core) begin

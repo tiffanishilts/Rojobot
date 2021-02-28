@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1614136972">
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1614509857">
   <File Type="BITSTR-BMM" Name="rvfpga_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="rvfpga_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="rvfpga_timing_summary_init.rpt"/>
@@ -84,8 +84,10 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/world_maps/world_map_partA/world_map.ngc">
+    <File Path="$PSRCDIR/sources_1/imports/world_maps_partA/world_map.ngc">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/world_maps_partA/world_map.ngc"/>
+        <Attr Name="ImportTime" Val="1612233077"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
       </FileInfo>
@@ -118,6 +120,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/dtg.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/spi/fifo4.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -132,6 +141,13 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/gpio/gpio_top.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/icon.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -166,6 +182,13 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/Peripherals/uart/raminfr.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/scale.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -385,7 +408,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/hdl_partA/world_maps_partA/world_map.v">
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/world_maps_partA/world_map.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -502,6 +525,13 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__common_cells_1.16.4/src/cdc_fifo_gray.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/colorizer.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -848,30 +878,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/lib/axi4_to_ahb.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/world_maps_partA/world_map.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/dtg.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/OtherSources/verilog-arbiter_0-r3/src/arbiter.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -944,14 +950,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/hdl_partB/dtg.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/jtag_vpi_0-r5/jtag_vpi.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -1009,6 +1007,14 @@
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/lib/ahb_to_axi4.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/SweRVolfSoC/SweRVEh1CoreComplex/lib/axi4_to_ahb.sv">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -1644,16 +1650,65 @@
         <Attr Name="UsedIn" Val="implementation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/world_maps_partA/world_map.ngc">
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__common_cells_1.16.4/include/common_cells/registers.svh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/dtg.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/PulpPlatform/pulp-platform.org__common_cells_1.16.4/include/common_cells/registers.svh">
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballE.mem">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballW.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballS.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballSW.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballN.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballNE.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballNW.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../ECE540ProjTwo/Rojobot/fpga_code/src/OtherSources/VGAcontroller/pokeballSE.mem">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
@@ -1688,7 +1743,9 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
+      <Desc>Default settings for Implementation.</Desc>
+    </StratHandle>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

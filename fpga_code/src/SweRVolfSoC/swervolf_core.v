@@ -85,11 +85,11 @@ module swervolf_core
     // ADDED for rojo
     inout wire [40:0]  io_rojo,
     output wire        IO_INT_ACK,
+    output wire [15:0] gpio_db,
     output wire [7:0]  AN,
     // ADDED for dp
     output wire        DP,
     output wire [6:0]  Digits_Bits,
-
     output wire        o_accel_sclk,
     output wire        o_accel_cs_n,
     output wire        o_accel_mosi,
@@ -309,7 +309,6 @@ module swervolf_core
    wire        gpio_irq;
    wire [31:0] i_gpio;
    wire [31:0] o_gpio;
-   wire [15:0] gpio_db;
 
    bidirec gpio0  (.oe(en_gpio[0] ), .inp(o_gpio[0] ), .outp(i_gpio[0] ), .bidir(io_data[0] ));
    bidirec gpio1  (.oe(en_gpio[1] ), .inp(o_gpio[1] ), .outp(i_gpio[1] ), .bidir(io_data[1] ));
@@ -418,7 +417,6 @@ wire [40:0] o_rojo;
    bidirec rojo5  (.oe(en_rojo[5] ), .inp(o_rojo[5] ), .outp(i_rojo[5] ), .bidir(io_rojo[5] ));
    bidirec rojo6  (.oe(en_rojo[6] ), .inp(o_rojo[6] ), .outp(i_rojo[6] ), .bidir(io_rojo[6] ));
    bidirec rojo7  (.oe(en_rojo[7] ), .inp(o_rojo[7] ), .outp(i_rojo[7] ), .bidir(io_rojo[7] ));
-  // bidirec rojo8  (.oe(en_rojo[8] ), .inp(o_rojo[8] ), .outp(i_rojo[8] ), .bidir(io_rojo[8] ));
    bidirec rojo9  (.oe(en_rojo[9] ), .inp(o_rojo[9] ), .outp(i_rojo[9] ), .bidir(io_rojo[9] ));
    bidirec rojo10 (.oe(en_rojo[10]), .inp(o_rojo[10]), .outp(i_rojo[10]), .bidir(io_rojo[10]));
    bidirec rojo11 (.oe(en_rojo[11]), .inp(o_rojo[11]), .outp(i_rojo[11]), .bidir(io_rojo[11]));
