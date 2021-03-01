@@ -226,9 +226,9 @@ module rvfpga
    (// Clock out ports
     .clk_75(clk_rojo),     // output clk_75
     // Status and control signals
-    .reset(rst_core), // input reset
+    .reset(user_rst), // input reset
    // Clock in ports
-    .clk_in1(clk_core));      // input clk_in1
+    .clk_in1(clk));      // input clk_in1
 
     world_map partAmap
     (.clka(clk_rojo),
@@ -248,7 +248,7 @@ module rvfpga
     .worldmap_addr(worldmap_addrA),
     .worldmap_data(worldmap_dataA),
     .clk_in(clk_rojo),
-    .reset(rst_core),
+    .reset(~rstn),
     .upd_sysregs(IO_BotUpdt),
     .Bot_Config_reg(gpio_db[7:0]));
 
@@ -261,7 +261,7 @@ module rvfpga
 
     dtg pokerojo (
         .clock(clk_rojo),
-        .rst(rst_core),
+        .rst(~rstn),
         .horiz_sync(hsync),
         .vert_sync(vsync),
         .video_on(vid_on),
@@ -269,7 +269,10 @@ module rvfpga
         .pixel_column(px_col)
     );
 
-    icon pokeball (
+    icon #(
+      .ICON_SCALE(1),
+      .CENT_CORR(1)
+    ) pokeball (
         .pixel_row(px_row),
         .pixel_column(px_col),
         .botinfo_reg(botInfo_reg),
