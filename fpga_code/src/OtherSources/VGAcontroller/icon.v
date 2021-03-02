@@ -22,24 +22,24 @@ localparam y_correct_l = CENT_CORR ? (icon_height/2) - 1 : 0;
 localparam x_correct_u = CENT_CORR ? (x_correct_l + 2) : icon_width;
 localparam y_correct_u = CENT_CORR ? (y_correct_l + 2) : icon_height;
 
-reg [1:0] corgi_n   [0:255];
-reg [1:0] corgi_ne  [0:255];
-reg [1:0] corgi_e   [0:255];
-reg [1:0] corgi_se  [0:255];
-reg [1:0] corgi_s   [0:255];
-reg [1:0] corgi_sw  [0:255];
-reg [1:0] corgi_w   [0:255];
-reg [1:0] corgi_nw  [0:255];
+reg [1:0] pokeballN   [0:255];
+reg [1:0] pokeballNE  [0:255];
+reg [1:0] pokeballE   [0:255];
+reg [1:0] pokeballSE  [0:255];
+reg [1:0] pokeballS   [0:255];
+reg [1:0] pokeballSW  [0:255];
+reg [1:0] pokeballW   [0:255];
+reg [1:0] pokeballNW  [0:255];
 
 initial begin
-    $readmemb("pokeballN.mem", corgi_n);
-    $readmemb("pokeballNE.mem", corgi_ne);
-    $readmemb("pokeballE.mem", corgi_e);
-    $readmemb("pokeballSE.mem", corgi_se);
-    $readmemb("pokeballS.mem", corgi_s);
-    $readmemb("pokeballSW.mem", corgi_sw);
-    $readmemb("pokeballW.mem", corgi_w);
-    $readmemb("pokeballNW.mem", corgi_nw);
+    $readmemb("pokeballN.mem", pokeballN);
+    $readmemb("pokeballNE.mem", pokeballNE);
+    $readmemb("pokeballE.mem", pokeballE);
+    $readmemb("pokeballSE.mem", pokeballSE);
+    $readmemb("pokeballS.mem", pokeballS);
+    $readmemb("pokeballSW.mem", pokeballSW);
+    $readmemb("pokeballW.mem", pokeballW);
+    $readmemb("pokeballNW.mem", pokeballNW);
 end
 
 reg [8:0] locx_512, locy_512, ico_col_d, ico_row_d;
@@ -58,14 +58,14 @@ always @(pixel_column or pixel_row) begin
         && (ico_row_d >= (locy_512-y_correct_l)) && (ico_row_d < (locy_512 + y_correct_u))) begin
         idx = (ico_col_d-(locx_512-x_correct_l)) + (ico_row_d-(locy_512-y_correct_l))*5'd16;            // Identify Icon Array Index
         case (botinfo_reg[2:0])     // Check Rojobot Orientation
-            3'h0:   icon <= corgi_n[idx];     // North
-            3'h1:   icon <= corgi_ne[idx];    // Northeast
-            3'h2:   icon <= corgi_e[idx];     // East
-            3'h3:   icon <= corgi_se[idx];    // Southeast
-            3'h4:   icon <= corgi_s[idx];     // South
-            3'h5:   icon <= corgi_sw[idx];    // Southwest
-            3'h6:   icon <= corgi_w[idx];     // West
-            3'h7:   icon <= corgi_nw[idx];    // Northwest
+            3'h0:   icon <= pokeballN[idx];     // North
+            3'h1:   icon <= pokeballNE[idx];    // Northeast
+            3'h2:   icon <= pokeballE[idx];     // East
+            3'h3:   icon <= pokeballSE[idx];    // Southeast
+            3'h4:   icon <= pokeballS[idx];     // South
+            3'h5:   icon <= pokeballSW[idx];    // Southwest
+            3'h6:   icon <= pokeballW[idx];     // West
+            3'h7:   icon <= pokeballNW[idx];    // Northwest
             default:        icon <= 2'b00;
         endcase
     end else begin

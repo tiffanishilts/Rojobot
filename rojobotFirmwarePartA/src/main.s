@@ -332,7 +332,9 @@ _start:
                 li s1, 0   // initialize state for state machine
                 li s2, PORT_BOTCTRL
                 li s3, PORT_BOTINFO
-                li s4, 0   // initialize turn counter
+                li s4, 0   // initialize original turn orientation
+                li s10, 0   // initialize bactrack orientation counter
+                li s11, 0
 
 # ==================
 # === Main  Loop ===
@@ -784,11 +786,17 @@ next_step_auto:
                 li t1, 4
                 beq t1, s1, TURNINGWRAPCASE   // if in state three, go to turn
 
-               // li t1, 5
-               // beq t1, s1, ENDTURN   // if in state three, and s4 has progressed to 3, go to end turn
+                li t1, 5
+                beq t1, s1, ENDTURN   // if in state three, and s4 has progressed to 3, go to end turn
 
                 li t1, 6
                 beq t1, s1, BLOCKED   // if in state five, go to blocked
+
+                li t1, 7
+                beq t1, s1, CHECKBACKTRACK   // if in state five, go to blocked
+
+                li t1, 8
+                beq t1, s1, HOLD   // if in state five, go to blocked
 
                 ENTERBLOCKEDSTATE:
 
@@ -803,13 +811,10 @@ next_step_auto:
                 nop
 
                 INIT:
-                
-                li t1, 0x00           // load value to turn left and right motor off
-                sb t1, 0(s2)          // STOP
-
-                ENTERONLINESTATE:
 
                 li s1, 1   // set new state to online
+                li t1, 0x00           // load value to turn left and right motor off
+                sb t1, 0(s2)          // STOP
 
                 beq     zero, zero, ret_next_step   // return to main loop
                 nop
@@ -830,6 +835,10 @@ next_step_auto:
                 srli t1, t1, 8            // shift over for sensor reg
                 andi t1, t1, 0x00000007   // mask for blk line sensors
                 bne t1, zero, ENTERREVSTATE   // jump to reverse if not over black line
+
+                j set_back_track
+
+                BACKTRACK_SET:
   
                 li t1, 0x33           // load value to put left and right motor in to forward mode
                 sb t1, 0(s2)          // FWD
@@ -840,9 +849,8 @@ next_step_auto:
                 ENTERREVSTATE:
 
                 li s1, 2   // set new state
-
                 
-                li t1, 0x22           // load value to put left and right motor in reverse
+                li t1, 0x00           // load value to put left and right motor in reverse
                 sb t1, 0(s2)          // REV
 
                 beq     zero, zero, ret_next_step
@@ -911,20 +919,49 @@ next_step_auto:
 
                 beq     zero, zero, ret_next_step
                 nop
+                
+                CHECKBACKTRACK:
 
-                // ENTERENDTURNSTATE:
+                lw t1, 0(s3)   // read orientation
+                andi t1, t1, 0x00000007
 
-                // li s1, 5 // set new state
+                bne s10, t1, HOLD
 
-                // beq     zero, zero, ret_next_step
-                // nop 
+                li t2, 0x00           // load value to turn left and right motor off
+                sb t2, 0(s2)          // STOP
+
+                li t3, 7
+                bne t3, t1, NOTWRAP
+                li s1, 4
+
+                NOTWRAP:
+
+                li s1, 3
+
+                beq     zero, zero, ret_next_step
+                nop
+
+                HOLD:
+
+                li t1, 5
+                beq s11, t1, INIT
+
+                addi s11, s11, 1
+
+                //li s1, 0
+
+                li t1, 0x33           // load value to put left and right motor in to forward mode
+                sb t1, 0(s2)          // FWD
+
+                beq     zero, zero, ret_next_step   // return to main loop
+                nop
 
                 ENDTURN:
-
+                
+                li s1, 7   // set new state
+                 
                 li t1, 0x00           // load value to turn left and right motor off
                 sb t1, 0(s2)          // STOP
-
-                li s1, 1   // set new state
 
                 beq     zero, zero, ret_next_step
                 nop
@@ -951,6 +988,64 @@ next_step_manual:
 #*************************
 # Nexyx5 I/O Functions
 #*************************
+
+set_back_track:
+
+               lw s10, 0(s3)   // read orientation
+               andi s10, s10, 0x00000007
+
+               casesetzero:
+
+               bne s10, zero, casesetone
+               li s10, 4
+               beq zero, zero, BACKTRACK_SET
+
+               casesetone:
+
+               li t2, 1
+               bne s10, t2, casesettwo
+               li s10, 5
+               beq zero, zero, BACKTRACK_SET
+
+               casesettwo:
+
+               li t2, 2
+               bne s10, t2, casesetthree
+               li s10, 6
+               beq zero, zero, BACKTRACK_SET
+
+               casesetthree:
+
+               li t2, 3
+               bne s10, t2, casesetfour
+               li s10, 7
+               beq zero, zero, BACKTRACK_SET
+
+               casesetfour:
+
+               li t2, 4
+               bne s10, t2, casesetfive
+               li s10, 0
+               beq zero, zero, BACKTRACK_SET
+
+               casesetfive:
+               
+               li t2, 5
+               bne s10, t2, casesetsix
+               li s10, 1
+               beq zero, zero, BACKTRACK_SET
+
+               casesetsix:
+
+               li t2, 6
+               bne s10, t2, casesetseven
+               li s10, 2
+               beq zero, zero, BACKTRACK_SET
+
+               casesetseven:
+
+               li s10, 3
+               beq zero, zero, BACKTRACK_SET
 
 #---------------------
 # check_off_black_line() - Check if the robot is off black line
