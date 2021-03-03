@@ -205,10 +205,11 @@ module rvfpga
 
    // poke rojo
 
-   wire    clk_rojo;
-   wire    IO_BotUpdt;
-   wire    IO_INT_ACK;
-   reg     IO_BotUpdt_Sync;
+   wire clk_rojo;
+   wire IO_BotUpdt;
+   wire IO_INT_ACK;
+   reg IO_BotUpdt_Sync;
+   wire upd_sysregs;
    wire [13:0]  worldmap_addrA;
    wire [1:0]   worldmap_dataA;
    wire [13:0]  worldmap_VGAaddr;
@@ -249,7 +250,7 @@ module rvfpga
     .worldmap_data(worldmap_dataA),
     .clk_in(clk_rojo),
     .reset(~rstn),
-    .upd_sysregs(IO_BotUpdt),
+    .upd_sysregs(upd_sysregs),
     .Bot_Config_reg(gpio_db[7:0]));
 
     // VGA
@@ -357,8 +358,9 @@ module rvfpga
       .io_data        ({i_sw[15:0],gpio_out[15:0]}),
       // ADDED
       .io_pb  (i_pb),
-      .io_rojo ({locX_reg, locY_reg, sensors_reg, botInfo_reg, IO_BotUpdt_Sync, motCtl_in}),
-      .IO_INT_ACK(IO_INT_ACK),
+      .io_rojo ({locX_reg, locY_reg, sensors_reg, botInfo_reg, motCtl_in}),
+      .io_botupdt_sync(IO_BotUpdt_Sync),
+      .io_int_ack(IO_INT_ACK),
       // added
       .gpio_db(gpio_db),
       .AN (AN),
@@ -371,16 +373,16 @@ module rvfpga
       .i_accel_miso   (i_accel_miso));
 
 
-   always @ (posedge clk_rojo) begin
+   always @ (posedge clk_rojo) begin: Handshake_FF
        if (IO_INT_ACK == 1'b1) begin
            IO_BotUpdt_Sync <= 1'b0;
        end
-       else if (IO_BotUpdt == 1'b1) begin
+       else if (upd_sysregs == 1'b1) begin
            IO_BotUpdt_Sync <= 1'b1;
        end else begin
            IO_BotUpdt_Sync <= IO_BotUpdt_Sync;
        end
-   end
+   end: Handshake_FF
 
 
    always @(posedge clk_core) begin

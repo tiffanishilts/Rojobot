@@ -83,8 +83,9 @@ module swervolf_core
     // ADDED for pb
     inout wire [4:0]   io_pb,
     // ADDED for rojo
-    inout wire [40:0]  io_rojo,
-    output wire        IO_INT_ACK,
+    inout wire [39:0]  io_rojo,
+    input wire io_botupdt_sync,
+    output wire io_int_ack,
     output wire [15:0] gpio_db,
     output wire [7:0]  AN,
     // ADDED for dp
@@ -374,7 +375,7 @@ module swervolf_core
   bidirec pb3  (.oe(en_pb[2]), .inp(o_pb[2]), .outp(i_pb[2]), .bidir(io_pb[2]));
   bidirec pb4  (.oe(en_pb[3]), .inp(o_pb[3]), .outp(i_pb[3]), .bidir(io_pb[3]));
   bidirec pb5  (.oe(en_pb[4]), .inp(o_pb[4]), .outp(i_pb[4]), .bidir(io_pb[4]));
-  bidirec botupdt (.oe(en_rojo[8]), .inp(o_rojo[8]), .outp(i_rojo[8]), .bidir(io_rojo[8]));
+
 
   debounce pushbutton(
     .clk(clk),
@@ -398,15 +399,15 @@ module swervolf_core
         .wb_err_o     (wb_s2m_pb_err),
         .wb_inta_o    (),   // I'm not sure this was doing anything with the signal I created?
         // External GPIO Interface
-        .ext_pad_i    ({23'b0, i_rojo[8], 2'b0, pb_db[5:0]}),
-        .ext_pad_o    (),
+        .ext_pad_i    ({23'b0, io_botupdt_sync, 2'b0, pb_db[5:0]}),
+        .ext_pad_o    (io_int_ack),
         .ext_padoe_o  ());
 
 
 // GPIO - ROJOBOT
-wire [40:0] en_rojo;
-wire [40:0] i_rojo;
-wire [40:0] o_rojo;
+wire [39:0] en_rojo;
+wire [39:0] i_rojo;
+wire [39:0] o_rojo;
 
 // tristate rojo signals
    bidirec rojo0  (.oe(en_rojo[0] ), .inp(o_rojo[0] ), .outp(i_rojo[0] ), .bidir(io_rojo[0] ));
@@ -417,6 +418,7 @@ wire [40:0] o_rojo;
    bidirec rojo5  (.oe(en_rojo[5] ), .inp(o_rojo[5] ), .outp(i_rojo[5] ), .bidir(io_rojo[5] ));
    bidirec rojo6  (.oe(en_rojo[6] ), .inp(o_rojo[6] ), .outp(i_rojo[6] ), .bidir(io_rojo[6] ));
    bidirec rojo7  (.oe(en_rojo[7] ), .inp(o_rojo[7] ), .outp(i_rojo[7] ), .bidir(io_rojo[7] ));
+   bidirec rojo8  (.oe(en_rojo[8] ), .inp(o_rojo[8] ), .outp(i_rojo[8] ), .bidir(io_rojo[8] ));
    bidirec rojo9  (.oe(en_rojo[9] ), .inp(o_rojo[9] ), .outp(i_rojo[9] ), .bidir(io_rojo[9] ));
    bidirec rojo10 (.oe(en_rojo[10]), .inp(o_rojo[10]), .outp(i_rojo[10]), .bidir(io_rojo[10]));
    bidirec rojo11 (.oe(en_rojo[11]), .inp(o_rojo[11]), .outp(i_rojo[11]), .bidir(io_rojo[11]));
@@ -448,7 +450,7 @@ wire [40:0] o_rojo;
    bidirec rojo37 (.oe(en_rojo[37]), .inp(o_rojo[37]), .outp(i_rojo[37]), .bidir(io_rojo[37]));
    bidirec rojo38 (.oe(en_rojo[38]), .inp(o_rojo[38]), .outp(i_rojo[38]), .bidir(io_rojo[38]));
    bidirec rojo39 (.oe(en_rojo[39]), .inp(o_rojo[39]), .outp(i_rojo[39]), .bidir(io_rojo[39]));
-   bidirec rojo40 (.oe(en_rojo[40]), .inp(o_rojo[40]), .outp(i_rojo[40]), .bidir(io_rojo[40]));
+
 
  gpio_top rojo_module(
         .wb_clk_i     (clk), 
@@ -464,11 +466,9 @@ wire [40:0] o_rojo;
         .wb_err_o     (wb_s2m_rojo_err),
         .wb_inta_o    (),
         // External GPIO Interface
-        .ext_pad_i    (i_rojo[40:9]),
+        .ext_pad_i    (i_rojo[39:8]),
         .ext_pad_o    ({24'b0, o_rojo[7:0]}),
         .ext_padoe_o  ({24'b0, en_rojo[7:0]})); 
-
-  assign IO_INT_ACK = i_rojo[8];
 
    // PTC
    wire        ptc_irq;
